@@ -1,1 +1,140 @@
+# Miguel Angel Rincon Sarmiento
+# TicToc Attempt 2
+
+from random import randint
+
+
+# Functions
+def clear_output():
+    print('\n'*100)
+
+
+def choose_first():
+    num = randint(0, 1)
+    if num == 0:
+        return 'player1', 'player2'
+    else:
+        return 'player2', 'player1'
+
+
+def player_input(player_in1):
+    if player_in1 == 'X':
+        marks = ('X', 'O')
+    else:
+        marks = ('O', 'X')
+    return marks
+
+
+def display_board(board):
+    print(board[1]+'|'+board[2]+'|'+board[3])
+    print('-----')
+    print(board[4]+'|'+board[5]+'|'+board[6])
+    print('-----')
+    print(board[7]+'|'+board[8]+'|'+board[9])
+
+
+def place_marker(board, marker, position):
+    board[position] = marker
+
+
+def space_check(board, position):
+    if board[position] is not ' ':
+        return False
+    else:
+        return True
+
+
+def player_choice(board):
+    choice = ''
+    while choice not in range(1, 10):
+        choice = int(input(player+' make your next move [1-9]'))
+        while space_check(board, choice) is False:
+            choice = int(input(player + ' make your next move [1-9]'))
+
+    return choice
+
+
+def full_board_check(board):
+    if ' ' not in board:
+        return True
+    else:
+        return False
+
+
+def replay():
+    play_again = ''
+    while play_again not in ['Y', 'N']:
+        play_again = input('Would you like to play again?(Y/N): ')
+    if play_again == 'Y':
+        return True
+    else:
+        return False
+
+
+def win_check(board, mark):
+    if board[1] == board[2] == board[3] == mark:
+        return True
+    if board[4] == board[5] == board[6] == mark:
+        return True
+    if board[7] == board[8] == board[9] == mark:
+        return True
+    if board[1] == board[4] == board[7] == mark:
+        return True
+    if board[2] == board[5] == board[8] == mark:
+        return True
+    if board[3] == board[6] == board[9] == mark:
+        return True
+    if board[1] == board[5] == board[9] == mark:
+        return True
+    if board[3] == board[5] == board[7] == mark:
+        return True
+    else:
+        return False
+
+
+# setting up user variables and game pieces
+player1 = ''
+player2 = ''
+ply1_in = ''
+clear_output()
+
+
+while ply1_in not in ['X', 'O']:
+    ply1_in = input("Player1, please pick a marker 'X' or 'O': ")
+    player1, player2 = player_input(ply1_in)
+    clear_output()
+
+# gameplay
+while True:
+    board_used = ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    won = False
+    players = choose_first()
+    # while there are no winners adn the board is still empty the game will continue
+    while not won and full_board_check(board_used) is False:
+        # player turns
+        for player in players:
+            # player will make a move, function will make sure move is legal
+            ply_in = player_choice(board_used)
+            # the correct marker will be given to the current player
+            if player == 'player1':
+                marker = player1
+            else:
+                marker = player2
+            # the legal move selected by the player will be placed into the board
+            place_marker(board_used, marker, ply_in)
+            # the board is displayed
+            display_board(board_used)
+            won = win_check(board_used, marker)
+            # while there are no Winners or Ties, the game will continue
+            if won is True:
+                print(player+' is the WINNER!')
+                break
+            if full_board_check(board_used) is True:
+                print('TIE GAME!')
+                break
+
+    # the user can decide if they want to continue playing
+    if not replay():
+        break
+
 
