@@ -2,16 +2,25 @@
 # Miguel Rincon
 
 class Dog():
-    def __init__(self, breed, name, spots):
+
+    # CLASS OBJECT ATTRIBUTE
+    # SAME FOR ANY INSTANCE OF A CLASS
+    species = 'mammal'
+
+    def __init__(self, breed, name, spots, years):
         self.breed = breed
         self.name = name
         self.spots = spots
+        # WE CAN MODIFY THE ATTRIBUTES WITHOUT NEEDING TO USE A METHOD
+        self.years = str(years*7)
+    # METHODS ARE FUNCTIONS INSIDE CLASSES THAT WE MAY USE FOR MULTIPLE TASKS
+    # IN THIS CASE, GIVING INFO ABOUT MY DOG ABBY
     def spotted(self):
         if not self.spots:
             return "doesn't have spots"
         else:
             return "does have spots"
 
-my_dog = Dog('Yorkie', 'Abby', False)
+my_dog = Dog('Yorkie', 'Abby', False, 4)
 print(type(my_dog))
-print('My dog is a {}, her name is {} and she {}.'.format(my_dog.breed, my_dog.name, my_dog.spotted()))
+print("My dog is a {}, her name is {}, she {} and she's {} in dog years. Also, she is a {}, but that's a given.".format(my_dog.breed, my_dog.name, my_dog.spotted(), my_dog.years, my_dog.species))
