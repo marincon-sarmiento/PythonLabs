@@ -1,0 +1,17 @@
+# Intro to OOP, basic program
+# Miguel Rincon
+
+class Dog():
+    def __init__(self, breed, name, spots):
+        self.breed = breed
+        self.name = name
+        self.spots = spots
+    def spotted(self):
+        if not self.spots:
+            return "doesn't have spots"
+        else:
+            return "does have spots"
+
+my_dog = Dog('Yorkie', 'Abby', False)
+print(type(my_dog))
+print('My dog is a {}, her name is {} and she {}.'.format(my_dog.breed, my_dog.name, my_dog.spotted()))
