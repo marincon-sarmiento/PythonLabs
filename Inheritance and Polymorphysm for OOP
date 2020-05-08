@@ -1,0 +1,71 @@
+# Inherirance and Polymorphysm for OOP
+# Miguel Rincon
+
+# Examples of Inheritance for classes
+class Animal():
+    def __init__(self):
+        print("Animal Created")
+
+    def who_am_i(self):
+            print("I am an animal")
+
+    def eat(self):
+            print("I am eating")
+
+
+class Dog(Animal):
+    # By using an already created class in the creation of a new one
+    # we are able to inherit that classes variables and methods as well
+    # as any procedures happening during the declaration of the class
+    # , such as printing "Animal Created".
+    def __init__(self, name):
+        self.name = name
+        Animal.__init__(self)
+        print("New dog {}".format(self.name))
+    # We can also overwrite existing methods and variables as well as
+    # create new ones
+    def eat(self):
+        print("I am eating dog food!")
+
+    def speak(self):
+        print("Abby says Woof!")
+
+cat = Animal()
+abby = Dog("Abby")
+
+cat.eat()
+abby.eat()
+abby.speak()
+
+print("\n"*3)
+# Examples of Polymorphism
+class Bird():
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print("{} says tweet!".format(self.name))
+
+
+class Cat():
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print("{} says meow!".format(self.name))
+
+Ari = Bird("Ari")
+Felix = Cat("Felix")
+Ari.speak()
+Felix.speak()
+
+# Polymorphism refers to the fact that you can call different methods that
+# belong to different classes and work in different ways with the same name
+# they will still work because they are each independently connected to
+# different classes. In the next example it can be seen how both objects
+# belong to different classes (bird and cat), and still they can both use
+# the speak method at the same time in the same loop.
+print('\n')
+for pet in [Ari, Felix]:
+    print(type(pet))
+    pet.speak()
