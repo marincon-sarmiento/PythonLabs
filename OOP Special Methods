@@ -1,0 +1,39 @@
+# Special Methods by Miguel Rincon
+
+# Special or Magic methods refer to a group of methods that
+# we can state inside our function in order to allow built in
+# Python operations to interact with our user created objects
+
+class Book():
+    def __init__(self, title, author, pages):
+        self.title = title
+        self.author = author
+        self.pages = pages
+
+    # This next method will define the return value given to any
+    # operation that asks for our object's  string value, like
+    # whenever we want to print the contents of our object
+    def __str__(self):
+        return '{} by {}'.format(self.title, self.author)
+
+    # This next method will define the return value given to
+    # operations asking for the length of our object, in this
+    # case we will return the number of pages on the book
+    def __len__(self):
+        return self.pages
+
+    # For the last example I will create a custom message that
+    # will appear each time a book object is deleted from memory
+    def __del__(self):
+        print('The book {} has been deleted from memory!'.format(self.title))
+
+# If run, the built in python functions are able to interact with my 
+# object:
+#
+# Learning Python by Miguel Rincon
+# 1000 pages
+# The book Learning Python has been deleted from memory!
+b = Book('Learning Python', 'Miguel Rincon', 1000)
+print(b)
+print(str(len(b))+' pages')
+del b
